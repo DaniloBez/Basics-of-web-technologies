@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Bezukh Danylo">
+    <title>Lab2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <article class="main">
+        <section class="products">
+            <form>
+                <div class="add-item">
+                    <input class="product-input" type="text" name="productName" id="productName" placeholder="Назва товару">
+                    <div class="search-button button-with-tooltip">
+                        <button type="button">Додати</button>
+                        <span class="data-tooltip">Кнопка</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="crossed left">Помідори</div>
+                    <div class="center"><div class="count">2</div></div>
+                    <div class="right">
+                        <div class="button-with-tooltip">
+                            <button type="button">Не куплено</button>
+                            <span class="data-tooltip">Кнопка</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left">Печиво</div>
+                    <div class="center">
+                        <div class="button-with-tooltip">
+                            <button class="remove-button" type="button">-</button>
+                            <span class="data-tooltip">Кнопка</span>
+                        </div>
+                        <div class="count">2</div>
+                        <div class="button-with-tooltip">
+                            <button class="add-button" type="button">+</button>
+                            <span class="data-tooltip">Кнопка</span>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="button-with-tooltip">
+                            <button type="button">Куплено</button>
+                            <span class="data-tooltip">Кнопка</span>
+                        </div>
+                        <div class="button-with-tooltip">
+                            <button class="remove-all-button" type="button">X</button>
+                            <span class="data-tooltip">Кнопка</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left"><input type="text" name="last-product-input" id="lastProductInput" placeholder="Сир"></div>
+                    <div class="center">
+                        <div class="button-with-tooltip">
+                            <button class="remove-button disabled-button" type="button">-</button>
+                            <span class="data-tooltip">Кнопка</span>
+                        </div>
+                        <div class="count">1</div>
+                        <div class="button-with-tooltip">
+                            <button class="add-button" type="button">+</button>
+                            <span class="data-tooltip">Кнопка</span>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="button-with-tooltip">
+                            <button type="button">Куплено</button>
+                            <span class="data-tooltip">Кнопка</span>
+                        </div>
+                        <div class="button-with-tooltip">
+                            <button class="remove-all-button" type="button">X</button>
+                            <span class="data-tooltip">Кнопка</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="info">
+            <div class="info-text">Залишилося</div>
+            <div class="info-items-list">
+                <div class="info-item">
+                    <div class="info-item-text">Печиво</div>
+                    <div class="info-item-count">2</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-text">Сир</div>
+                    <div class="info-item-count">1</div>
+                </div>
+            </div>
+            <div class="info-text">Куплено</div>
+            <div class="info-items-list">
+                <div class="info-item">
+                    <div class="info-item-text crossed">Помідори</div>
+                    <div class="info-item-count crossed">2</div>
+                </div>
+            </div>
+        </section>
+    </article>
+    <footer>
+        <span class="buy-list">Buy List</span>
+        <span class="created-by-main">Created by:</span>
+        <span class="created-by-second">Безух Данило</span>
+    </footer>
+</body>
+</html>
