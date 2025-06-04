@@ -51,9 +51,7 @@ export function removeProduct(event){
  * @param {MouseEvent} event - Подія натискання на кнопку "Куплено".
  */
 export function addToBuyList(event){
-    const id = event.target.closest('.row').id;
-
-    const product = products.find((pr) => pr.productId == id);
+    const product = getProductFromEvent(event)
 
     if(product == null)
         return;
@@ -67,13 +65,48 @@ export function addToBuyList(event){
  * @param {MouseEvent} event - Подія натискання на кнопку "Не куплено".
  */
 export function removeFromBuyList(event){
-    const id = event.target.closest('.row').id;
-
-    const product = products.find((pr) => pr.productId == id);
+    const product = getProductFromEvent(event)
 
     if(product == null)
         return;
 
     product.isBought = false;
     renderProduct(product);
+}
+
+/**
+ * Оновлює ім'я товару, яку користувач ввів.
+ * @param {FocusEvent} event - Подія при дефокусування назви товару.
+ */
+export function changeName(event){
+    const product = getProductFromEvent(event)
+
+    if(product == null)
+        return;
+
+    const newName = event.target.value.trim();
+    if (newName === '') return;
+    product.name = newName;
+
+    renderProduct(product);
+}
+
+/**
+ * Перевіряє чи можна змінювати назву торвару.
+ * @param {MouseEvent} event - Подія натиску на назву товару.
+ */
+export function canChangeName(event){
+    const product = getProductFromEvent(event)
+
+    return product.isBought == false;
+}   
+
+/**
+ * Повертає товар, з яким взаємодіють.
+ * @param {MouseEvent | FocusEvent} event - Подія взаємодії з товаром 
+ * @returns Товар, на який натиснули
+ */
+function getProductFromEvent(event) {
+    const id = event.target.closest('.row')?.id;
+    return products.find(pr => pr.productId == id);
 }

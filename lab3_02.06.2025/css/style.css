@@ -210,12 +210,12 @@ div.count{
     border-radius: 3px;
 }
 
-#lastProductInput{
+.change-name{
     width: 70px;
 }
 
-#lastProductInput:hover, 
-#lastProductInput:focus{
+.change-name:hover, 
+.change-name:focus{
     border-color:var(--input-hover);
     border-style: solid;
     outline: none;

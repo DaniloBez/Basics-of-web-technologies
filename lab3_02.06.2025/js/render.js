@@ -1,7 +1,7 @@
 import { createElement } from "./utils.js";
 import { Product } from "./model.js";
 import { listOfProducts } from "./dom.js";
-import { addToBuyList, removeFromBuyList } from "./handlers.js";
+import { addToBuyList, removeFromBuyList, changeName, canChangeName } from "./handlers.js";
 import { removeProduct } from "./handlers.js";
 
 
@@ -53,6 +53,7 @@ function createProduct(product){
 function fillProductElement(productElement, product){
     let name = createElement('div', 'left', product.name);
     name.classList += product.isBought ? ' crossed' : '';
+    name.addEventListener('click', (event) => startChangingName(event));
     productElement.appendChild(name);
 
     let quantity = getQuantityElement(product);
@@ -62,6 +63,23 @@ function fillProductElement(productElement, product){
     productElement.appendChild(logicButton);
 
     return productElement;
+}
+
+/**
+ * Створює поле для редагування ім'я продукта.
+ * @param {MouseEvent} event - подія натискання на назву товару.
+ */
+function startChangingName(event){
+    if(!canChangeName(event))
+        return;
+
+    let changeNameElement = createElement('input', 'change-name');
+    changeNameElement.type = 'text';
+    changeNameElement.value = event.target.textContent;
+    changeNameElement.addEventListener('focusout', (event) => changeName(event));
+
+    event.target.replaceWith(changeNameElement);
+    changeNameElement.focus();
 }
 
 /**
