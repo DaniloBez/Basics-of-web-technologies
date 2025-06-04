@@ -6,8 +6,13 @@ import { addProduct, getNewProduct } from "./handlers.js";
 
 // --- Events ---
 addProductButton.addEventListener('click', addProduct);
-//addProductButton.addEventListener('keypress', (event) => {if(event.key == 'Enter') addProduct()});  
-productNameInput.addEventListener('keypress', (event) => {if(event.key == 'Enter') addProduct()});
+productNameInput.addEventListener('keypress', (event) => {
+    if(event.key == 'Enter') {
+        event.preventDefault();
+        addProduct();
+    }
+
+    });
 
 
 // --- Init ---

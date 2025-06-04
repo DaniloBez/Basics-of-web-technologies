@@ -51,7 +51,7 @@ export function removeProduct(event){
  * @param {MouseEvent} event - Подія натискання на кнопку "Куплено".
  */
 export function addToBuyList(event){
-    const product = getProductFromEvent(event)
+    const product = getProductFromEvent(event);
 
     if(product == null)
         return;
@@ -65,7 +65,7 @@ export function addToBuyList(event){
  * @param {MouseEvent} event - Подія натискання на кнопку "Не куплено".
  */
 export function removeFromBuyList(event){
-    const product = getProductFromEvent(event)
+    const product = getProductFromEvent(event);
 
     if(product == null)
         return;
@@ -79,7 +79,7 @@ export function removeFromBuyList(event){
  * @param {FocusEvent} event - Подія при дефокусування назви товару.
  */
 export function changeName(event){
-    const product = getProductFromEvent(event)
+    const product = getProductFromEvent(event);
 
     if(product == null)
         return;
@@ -96,7 +96,7 @@ export function changeName(event){
  * @param {MouseEvent} event - Подія натиску на назву товару.
  */
 export function canChangeName(event){
-    const product = getProductFromEvent(event)
+    const product = getProductFromEvent(event);
 
     return product.isBought == false;
 }   
@@ -109,4 +109,14 @@ export function canChangeName(event){
 function getProductFromEvent(event) {
     const id = event.target.closest('.row')?.id;
     return products.find(pr => pr.productId == id);
+}
+
+export function changeQuantityProduct(event, delta){
+    const product = getProductFromEvent(event);
+
+    if(product == null)
+        return;
+
+    product.quantity += delta;
+    renderProduct(product);
 }

@@ -1,7 +1,7 @@
 import { createElement } from "./utils.js";
 import { Product } from "./model.js";
 import { listOfProducts } from "./dom.js";
-import { addToBuyList, removeFromBuyList, changeName, canChangeName } from "./handlers.js";
+import { addToBuyList, removeFromBuyList, changeName, canChangeName, changeQuantityProduct } from "./handlers.js";
 import { removeProduct } from "./handlers.js";
 
 
@@ -96,6 +96,7 @@ function getQuantityElement(product){
 
         if(product.quantity > 1){
             removeButton = createElement('button', 'remove-button', '-');
+            removeButton.addEventListener('click', (event) => changeQuantityProduct(event, -1));
         }
         else{
             removeButton = createElement('button', 'remove-button disabled-button', '-');
@@ -114,6 +115,7 @@ function getQuantityElement(product){
     if(!product.isBought){
         let add = createElement('div', 'button-with-tooltip');
         let addButton = createElement('button', 'add-button', '+');
+        addButton.addEventListener('click', (event) => changeQuantityProduct(event, 1));
         addButton.type = 'button';
         let addTooltip = createElement('span', 'data-tooltip', 'Збільшити кількість');
         add.appendChild(addButton);
