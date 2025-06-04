@@ -40,13 +40,13 @@ const products = [];
 /**
  * Створює новий HTML-елемент з класом і текстом.
  * @param {string} tag - Назва тега.
- * @param {string} [className=''] - Клас CSS.
+ * @param {string} [classList=''] - Класи CSS через пробіл.
  * @param {string} [textContent=''] - Вміст тексту.
  * @returns {HTMLElement} Створений HTML-елемент.
  */
-function createElement(tag, className = '', textContent = ''){
+function createElement(tag, classList = '', textContent = ''){
     const el = document.createElement(tag);
-    if (className) el.className = className;
+    if (classList) el.classList = classList;
     if (textContent) el.textContent = textContent;
     return el;
 }
@@ -93,7 +93,7 @@ function getQuantityElement(){
     let quantityElement = createElement('div', 'center');
 
     let remove = createElement('div', 'button-with-tooltip');
-    let removeButton = createElement('button', 'remove-button', '-');
+    let removeButton = createElement('button', 'remove-button disabled-button', '-');
     removeButton.type = 'button';
     let removeTooltip = createElement('span', 'data-tooltip', 'Зменшити кількість');
     remove.appendChild(removeButton);
@@ -178,3 +178,10 @@ productNameInput.addEventListener('keypress', (event) => {if(event.key == 'Enter
 
 // --- Init ---
 productNameInput.focus();
+
+for (const productName of ['Помідори', 'Печиво', 'Сир']) {
+    const product = getNewProduct(productName);
+    products.push(product);
+    renderProduct(product);
+
+}
