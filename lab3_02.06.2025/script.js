@@ -132,6 +132,7 @@ function getBuyButtons(){
     let remove = createElement('div', 'button-with-tooltip');
     let removeButton = createElement('button', 'remove-all-button', 'X');
     removeButton.type = 'button';
+    removeButton.addEventListener('click', (event) => removeProduct(event));
     let removeTooltip = createElement('span', 'data-tooltip', 'Видалити товар');
     remove.appendChild(removeButton);
     remove.appendChild(removeTooltip);
@@ -168,6 +169,17 @@ function addProduct(){
     productNameInput.value = '';
     productNameInput.focus();
 }
+/**
+ * @param {MouseEvent} event
+ */
+function removeProduct(event){
+    const id = event.target.closest('.row').id;
+    listOfProducts.removeChild(event.target.closest('.row'));
+    
+    const productId = products.findIndex((pr) => pr.productId == id);
+    if(productId !== -1) products.splice(productId, 1);
+    console.log(products);
+}
 
 
 // --- Events ---
@@ -183,5 +195,6 @@ for (const productName of ['Помідори', 'Печиво', 'Сир']) {
     const product = getNewProduct(productName);
     products.push(product);
     renderProduct(product);
-
 }
+
+console.log(products);
