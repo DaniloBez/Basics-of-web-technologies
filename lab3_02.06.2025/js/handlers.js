@@ -30,6 +30,8 @@ export function addProduct(){
 
     productNameInput.value = '';
     productNameInput.focus();
+
+    saveData();
 }
 
 /**
@@ -45,7 +47,8 @@ export function removeProduct(event){
     const productId = products.findIndex((pr) => pr.productId == id);
     if(productId !== -1) products.splice(productId, 1);
 
-    renderAllProductInfo();
+    renderAllProductInfo();    
+    saveData();
 }
 
 /**
@@ -59,7 +62,8 @@ export function addToBuyList(event){
         return;
 
     product.isBought = true;
-    renderProduct(product);
+    renderProduct(product);    
+    saveData();
 }
 
 /**
@@ -73,7 +77,8 @@ export function removeFromBuyList(event){
         return;
 
     product.isBought = false;
-    renderProduct(product);
+    renderProduct(product);    
+    saveData();
 }
 
 /**
@@ -90,7 +95,8 @@ export function changeName(event){
     if (newName === '') return;
     product.name = newName;
 
-    renderProduct(product);
+    renderProduct(product);    
+    saveData();
 }
 
 /**
@@ -120,5 +126,18 @@ export function changeQuantityProduct(event, delta){
         return;
 
     product.quantity += delta;
-    renderProduct(product);
+    renderProduct(product);    
+    saveData();
+}
+
+function saveData(){
+    localStorage.setItem('data', JSON.stringify(products));
+}
+
+export function loadData(){
+    const saved = localStorage.getItem('data');
+    if (saved) {
+        const parsed = JSON.parse(saved);
+        products.splice(0, products.length, ...parsed);
+    }
 }

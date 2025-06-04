@@ -1,7 +1,7 @@
 import { products } from "./state.js";
 import { addProductButton, productNameInput} from "./dom.js";
 import { renderProduct } from "./render.js";
-import { addProduct, getNewProduct } from "./handlers.js";
+import { addProduct, loadData } from "./handlers.js";
 
 
 // --- Events ---
@@ -11,15 +11,13 @@ productNameInput.addEventListener('keypress', (event) => {
         event.preventDefault();
         addProduct();
     }
-
-    });
+});
 
 
 // --- Init ---
 productNameInput.focus();
 
-for (const productName of ['Помідори', 'Печиво', 'Сир']) {
-    const product = getNewProduct(productName);
-    products.push(product);
+loadData();
+for (const product of products) {
     renderProduct(product);
 }
