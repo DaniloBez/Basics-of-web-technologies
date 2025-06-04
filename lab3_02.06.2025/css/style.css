@@ -94,7 +94,7 @@ button:hover~.data-tooltip{
 }
 
 .row{
-    height: 65px;
+    height: auto;
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     align-items: center;
@@ -103,6 +103,8 @@ button:hover~.data-tooltip{
 
 .left{
     justify-self: start;
+    word-break: break-all;
+    text-wrap: pretty;
 }
 
 .center{
