@@ -175,13 +175,13 @@ div.add-item{
     border-radius: 0px;
 }
 
-.search-button{
+.add-product-button{
     width: 20%;
     height: 40px;
     margin: 0 0 5px 0;
 }
 
-.search-button>button{
+.add-product-button>button{
     width: 100%;
     height: 100%;
 
@@ -197,6 +197,7 @@ div.add-item{
 .disabled-button{
     background-color: var(--remove-button-disabled-main);
     box-shadow: 0 2px var(--remove-button-disabled-second);
+    cursor: not-allowed;
 }
 
 div.count{
@@ -362,7 +363,7 @@ footer:hover>span.created-by-second{
         width: 80%;
     }
 
-    .search-button{
+    .add-product-button{
         width: 75px;
         font-size:small;
     }
