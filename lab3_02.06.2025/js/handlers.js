@@ -1,7 +1,7 @@
 import { productNameInput } from "./dom.js";
 import { products } from "./state.js";
 import { Product } from "./model.js";
-import { renderProduct } from "./render.js";
+import { renderProduct, renderAllProductInfo } from "./render.js";
 import { listOfProducts } from "./dom.js";
 
 /**
@@ -44,6 +44,8 @@ export function removeProduct(event){
     
     const productId = products.findIndex((pr) => pr.productId == id);
     if(productId !== -1) products.splice(productId, 1);
+
+    renderAllProductInfo();
 }
 
 /**

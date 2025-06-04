@@ -3,6 +3,7 @@ import { Product } from "./model.js";
 import { listOfProducts } from "./dom.js";
 import { addToBuyList, removeFromBuyList, changeName, canChangeName, changeQuantityProduct } from "./handlers.js";
 import { removeProduct } from "./handlers.js";
+import { products } from "./state.js";
 
 
 /**
@@ -10,11 +11,35 @@ import { removeProduct } from "./handlers.js";
  * @param {Product} product - Товар для відображення.
  */
 export function renderProduct(product){
-    if(document.getElementById(product.productId)){
+    if(document.getElementById(product.productId))
         rerenderProduct(product);
-    }
-    else{
+    else
         createProduct(product)
+    
+    renderAllProductInfo();
+}
+
+export function renderAllProductInfo(){
+    let remaining = document.getElementById('remaining');
+    remaining.replaceChildren();
+
+    let purchased = document.getElementById('purchased');
+    purchased.replaceChildren();
+
+    for (const product of products) {
+        let item = createElement('div', 'info-item');
+        item.appendChild(createElement('div', 'info-item-text', product.name));
+        item.appendChild(createElement('div', 'info-item-count', product.quantity));
+
+        if(!product.isBought){
+            remaining.appendChild(item);
+        }
+        else{
+            for (const element of item.children) {
+                element.classList.add('crossed');
+            }
+            purchased.append(item);
+        }
     }
 }
 
