@@ -58,7 +58,7 @@ function createElement(tag, classList = '', textContent = ''){
  */
 function renderProduct(product){
     if(document.getElementById(product.productId)){
-
+        rerenderProduct(product);
     }
     else{
         createProduct(product)
@@ -66,50 +66,89 @@ function renderProduct(product){
 }
 
 /**
+ * Повністю оновлює вміст елемента товару відповідно до його стану.
+ * @param {Product} product - Товар, який потрібно перерендерити.
+ */
+function rerenderProduct(product){
+    let productElement = document.getElementById(product.productId);
+    productElement.replaceChildren();
+
+    productElement = fillProductElement(productElement, product);
+}
+
+/**
  * Створює HTML-структуру товару та додає її в DOM.
  * @param {Product} product - Товар для створення.
  */
 function createProduct(product){
-    let row = createElement('div', 'row')
-    row.id = product.productId;
+    let productElement = createElement('div', 'row')
+    productElement.id = product.productId;
 
+    productElement = fillProductElement(productElement, product);
+
+    listOfProducts.appendChild(productElement, product);
+}
+
+/**
+ * Оновлює HTML-елемент товару відповідно до його стану (куплено / не куплено).
+ * Додає назву товару, кількість і відповідні кнопки (залежно від `product.isBought`).
+ *
+ * @param {HTMLDivElement} productElement - Елемент, який представляє товар у DOM.
+ * @param {Product} product - Обʼєкт товару з інформацією про назву, кількість, статус.
+ * @returns {HTMLDivElement} - Оновлений елемент товару.
+ */
+function fillProductElement(productElement, product){
     let name = createElement('div', 'left', product.name);
-    row.appendChild(name);
+    name.classList += product.isBought ? ' crossed' : '';
+    productElement.appendChild(name);
 
-    let quantity = getQuantityElement();
-    row.appendChild(quantity);
+    let quantity = getQuantityElement(product);
+    productElement.appendChild(quantity);
 
-    let buyButtons = getBuyButtons();
-    row.appendChild(buyButtons);
+    let logicButton = product.isBought ? getRemoveFromBuyListButtons(product) : getBuyButtons();
+    productElement.appendChild(logicButton);
 
-    listOfProducts.appendChild(row);
+    return productElement;
 }
 
 /**
  * Створює блок керування кількістю.
+ * @param {Product} product 
  * @returns {HTMLDivElement} Елемент кількості.
  */
-function getQuantityElement(){
+function getQuantityElement(product){
     let quantityElement = createElement('div', 'center');
 
-    let remove = createElement('div', 'button-with-tooltip');
-    let removeButton = createElement('button', 'remove-button disabled-button', '-');
-    removeButton.type = 'button';
-    let removeTooltip = createElement('span', 'data-tooltip', 'Зменшити кількість');
-    remove.appendChild(removeButton);
-    remove.appendChild(removeTooltip);
-    quantityElement.appendChild(remove);
+    if(!product.isBought){
+        let remove = createElement('div', 'button-with-tooltip');
+        let removeButton;
 
-    let quantityCount = createElement('div', 'count', 1);
-    quantityElement.appendChild(quantityCount)
+        if(product.quantity > 1){
+            removeButton = createElement('button', 'remove-button', '-');
+        }
+        else{
+            removeButton = createElement('button', 'remove-button disabled-button', '-');
+        }
 
-    let add = createElement('div', 'button-with-tooltip');
-    let addButton = createElement('button', 'add-button', '+');
-    addButton.type = 'button';
-    let addTooltip = createElement('span', 'data-tooltip', 'Збільшити кількість');
-    add.appendChild(addButton);
-    add.appendChild(addTooltip);
-    quantityElement.appendChild(add);
+        removeButton.type = 'button';
+        let removeTooltip = createElement('span', 'data-tooltip', 'Зменшити кількість');
+        remove.appendChild(removeButton);
+        remove.appendChild(removeTooltip);
+        quantityElement.appendChild(remove);
+    }
+
+    let quantityCount = createElement('div', 'count', product.quantity);
+    quantityElement.appendChild(quantityCount);
+
+    if(!product.isBought){
+        let add = createElement('div', 'button-with-tooltip');
+        let addButton = createElement('button', 'add-button', '+');
+        addButton.type = 'button';
+        let addTooltip = createElement('span', 'data-tooltip', 'Збільшити кількість');
+        add.appendChild(addButton);
+        add.appendChild(addTooltip);
+        quantityElement.appendChild(add);
+    }
 
     return quantityElement;
 }
@@ -124,6 +163,7 @@ function getBuyButtons(){
     let buy = createElement('div', 'button-with-tooltip');
     let buyButton = createElement('button', '', 'Куплено');
     buyButton.type = 'button';
+    buyButton.addEventListener('click', (event) => addToBuyList(event));
     let buyTooltip = createElement('span', 'data-tooltip', 'Познатичти як куплене');
     buy.appendChild(buyButton);
     buy.appendChild(buyTooltip);
@@ -138,6 +178,25 @@ function getBuyButtons(){
     remove.appendChild(removeTooltip);
     buyButtons.appendChild(remove);
     return buyButtons;
+}
+
+/**
+ * Створює блок кнопок "Куплено" і "Видалити".
+ * @returns {HTMLDivElement} Елемент кнопок.
+ */
+function getRemoveFromBuyListButtons(){
+    let removeButton = createElement('div', 'right');
+
+    let remove = createElement('div', 'button-with-tooltip');
+    let removeFromBuyListButton = createElement('button', '', 'Не куплено');
+    removeFromBuyListButton.addEventListener('click', (event) => removeFromBuyList(event));
+    removeFromBuyListButton.type = 'button';
+    let removeTooltip = createElement('span', 'data-tooltip', 'Познатичти як не куплене');
+    remove.appendChild(removeFromBuyListButton);
+    remove.appendChild(removeTooltip);
+    removeButton.appendChild(remove);
+
+    return removeButton;
 }
 
 
@@ -169,8 +228,12 @@ function addProduct(){
     productNameInput.value = '';
     productNameInput.focus();
 }
+
 /**
- * @param {MouseEvent} event
+ * Видаляє товар зі списку після натискання кнопки.
+ * Видаляє елемент з DOM і з масиву `products`.
+ * 
+ * @param {MouseEvent} event - Подія кліку по кнопці видалення.
  */
 function removeProduct(event){
     const id = event.target.closest('.row').id;
@@ -178,7 +241,38 @@ function removeProduct(event){
     
     const productId = products.findIndex((pr) => pr.productId == id);
     if(productId !== -1) products.splice(productId, 1);
-    console.log(products);
+}
+
+/**
+ * Перемикає стан товару на "куплено", оновлює DOM.
+ * @param {MouseEvent} event - Подія натискання на кнопку "Куплено".
+ */
+function addToBuyList(event){
+    const id = event.target.closest('.row').id;
+
+    const product = products.find((pr) => pr.productId == id);
+
+    if(product == null)
+        return;
+
+    product.isBought = true;
+    renderProduct(product);
+}
+
+/**
+ * Перемикає стан товару на "не куплено", оновлює DOM.
+ * @param {MouseEvent} event - Подія натискання на кнопку "Не куплено".
+ */
+function removeFromBuyList(event){
+    const id = event.target.closest('.row').id;
+
+    const product = products.find((pr) => pr.productId == id);
+
+    if(product == null)
+        return;
+
+    product.isBought = false;
+    renderProduct(product);
 }
 
 
@@ -196,5 +290,3 @@ for (const productName of ['Помідори', 'Печиво', 'Сир']) {
     products.push(product);
     renderProduct(product);
 }
-
-console.log(products);
