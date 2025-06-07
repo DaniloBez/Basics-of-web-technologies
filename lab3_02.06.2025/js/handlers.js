@@ -136,8 +136,14 @@ function saveData(){
 
 export function loadData(){
     const saved = localStorage.getItem('data');
-    if (saved) {
+    if (saved !== "[]") {
         const parsed = JSON.parse(saved);
         products.splice(0, products.length, ...parsed);
+    }
+    else{
+        for (const name of ["Томати", "Печиво", "Сир"]) {
+            let p = getNewProduct(name);
+            products.push(p);
+        }
     }
 }

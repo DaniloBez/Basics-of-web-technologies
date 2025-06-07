@@ -3,10 +3,8 @@
  * @class
  */
 export class Product {
-    static nextId = 0;
-
     constructor(name, quantity, isBought) {
-        this.productId = Product.nextId++;
+        this.productId = crypto.randomUUID();
         this.name = name;
         this.quantity = quantity;
         this.isBought = isBought;

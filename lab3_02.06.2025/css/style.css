@@ -252,6 +252,11 @@ div.count{
     align-items: center ;
 }
 
+.info-item-text{
+    word-break: break-all;
+    text-wrap: pretty;
+}
+
 .info-item-count{
     display: flex;
     background-color: var(--item-count);
