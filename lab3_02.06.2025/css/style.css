@@ -1,0 +1,381 @@
+:root{
+    --main: lightgray;
+    --main-fill: white;
+    --main-text: white;
+    --second-text: black;
+    --main-second: gray;
+    --add-button-main: rgb(59, 185, 59);
+    --add-button-second: rgb(35, 110, 35);
+    --remove-button-main: red;
+    --remove-button-second: darkred;
+    --remove-button-disabled-main: palevioletred;
+    --remove-button-disabled-second: rgb(189, 61, 104);
+    --item-count: orange;
+    --input-hover: lightblue;
+    --main-add-button-main: blue;
+    --main-add-button-second: darkblue;
+    --footer-main: darkorchid;
+    --footer-second: blue;
+    --footer-print: white;
+    --footer-print-border: darkorchid;
+    --tooltip-bg: darkorchid;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+article.main{
+    padding: 20px;
+    background-color: var(--main);
+    height: auto;
+    display: flex;
+    gap: 3%;
+    align-items: flex-start;
+}
+
+article>section{
+    background-color: var(--main-fill);
+    border-radius: 7px;
+}
+
+section.products{
+    flex: 2 1 60%
+}
+
+section.info{
+    flex: 1 1 30%
+}
+
+section>div,
+form>div{
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--main-second);
+}
+section>div:last-child,
+form>div:last-child{
+    border-bottom: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.05);
+    transition: all 0.1s ease-in-out;
+}
+
+.data-tooltip{
+    visibility: hidden;
+    background-color: var(--tooltip-bg);
+    color: var(--main-text);
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 10;
+
+    
+    width: 120px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+button:hover~.data-tooltip{
+    visibility:visible;
+    opacity: 1;
+}
+
+.row{
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.left{
+    justify-self: start;
+    word-break: break-all;
+    text-wrap: pretty;
+}
+
+.center{
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.right{
+    justify-self: end;
+    display: flex;
+    align-items: center;
+}
+
+div button{
+    padding: 7px;
+    background-color: var(--main);
+    border: solid 1px var(--main-second);
+    border-radius: 5px;
+    box-shadow: 0px 2px var(--main-second);
+}
+
+div.center button{
+    color: var(--main-text);
+    border-radius: 100%;
+    width: 36px;
+    border: none;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.crossed{
+    text-decoration: line-through;
+}
+
+.remove-button{
+    background-color: var(--remove-button-main);
+    box-shadow: 0 2px var(--remove-button-second);
+}
+
+.add-button{
+    background-color: var(--add-button-main);
+    box-shadow: 0 2px var(--add-button-second);
+}
+
+.remove-all-button{
+    background-color: var(--remove-button-main);
+    box-shadow: 0 2px var(--remove-button-second);
+    width: 35px;
+    color: var(--main-text);
+    font-size:x-small;
+    font-weight: bolder;
+}
+
+.button-with-tooltip{
+    position: relative;
+    box-sizing: border-box;
+    margin: 2px;
+}
+
+div.add-item{
+    height: 65px;
+    display: flex;
+}
+
+.product-input{
+    width: 80%;
+    padding: 7px;
+    border-radius: 0px;
+}
+
+.add-product-button{
+    width: 20%;
+    height: 40px;
+    margin: 0 0 5px 0;
+}
+
+.add-product-button>button{
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--main-add-button-main);
+    border: none;
+    border-radius: 0 5px 5px 0;
+    color: var(--main-text);
+    font-weight: bold;
+    font-size: large;
+    box-shadow: 0 5px var(--main-add-button-second);
+}
+
+.disabled-button{
+    background-color: var(--remove-button-disabled-main);
+    box-shadow: 0 2px var(--remove-button-disabled-second);
+    cursor: not-allowed;
+}
+
+div.count{
+    background-color: var(--main);
+    padding: 5px 10px 5px 10px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+
+.change-name{
+    width: 70px;
+}
+
+.change-name:hover, 
+.change-name:focus{
+    border-color:var(--input-hover);
+    border-style: solid;
+    outline: none;
+}
+
+.info-text, 
+.info-items-list{
+    height: 60px;
+}
+
+.info-text{
+    color: var(--second-text);
+    font-weight: bold;
+    font-size: x-large;
+    padding-top: 17px;
+    padding-left: 17px;
+}
+
+.info-items-list{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.info-item{
+    background-color: var(--main);
+    border-radius: 5px;
+    margin: 2px;
+    margin-right: 5px;
+    display: flex;
+    padding: 7px;
+    gap: 5px;
+    align-items: center ;
+}
+
+.info-item-text{
+    word-break: break-all;
+    text-wrap: pretty;
+}
+
+.info-item-count{
+    display: flex;
+    background-color: var(--item-count);
+    width: 16px;
+    border-radius: 30px;
+    padding: 5px;
+    justify-content: center;
+    color: var(--main-text);
+}
+
+footer{
+    position: fixed;
+    bottom: 0px;
+    left: 20px;
+    color: var(--main-text);
+    background-color: var(--footer-main);
+    border-radius:5px 5px 0 0;
+    width: 100px;
+    height: 35px;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-left: 7px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: left; 
+    justify-content: center;
+
+    transition: 0.5s ease-in-out;
+}
+
+footer>span.created-by-main,
+footer>span.created-by-second{
+    display: none;
+}
+
+footer:hover{
+    height: 100px;
+    background-color: var(--footer-second);
+}
+
+@media print{
+footer{
+    height: 50px;
+    background-color: var(--footer-print);
+    border: solid 1px var(--footer-print-border);
+}
+
+footer>span.buy-list{
+    display: none;
+}
+
+footer>span.created-by-main,
+footer>span.created-by-second{
+    display: inline-block;
+    color: var(--second-text);
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+}
+
+footer:hover>span.created-by-main,
+footer:hover>span.created-by-second{
+    display: inline-block;
+    color: var(--main-text);
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.buy-list{
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+
+.created-by-main{
+    font-size: 0.5em;
+}
+
+.created-by-second{
+    font-size: 0.8em;
+}
+
+
+@media (max-width: 625px) {
+    article.main {
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    section.products,
+    section.info {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 500px) {
+    article.main {
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    section.products,
+    section.info {
+        width: 100%;
+    }
+
+    .product-input{
+        width: 80%;
+    }
+
+    .add-product-button{
+        width: 75px;
+        font-size:small;
+    }
+
+    #lastProductInput{
+        width: 50px;
+    }
+}
