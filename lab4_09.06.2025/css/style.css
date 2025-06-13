@@ -1,0 +1,424 @@
+:root{
+    --main-bg: rgb(241, 241, 241);
+    --second-bg: white;
+    --second-border-color: lightgray;
+    --border-radius: 0.4em;
+    --priority-border-radius: 0.6em;
+    --sort-font-color: gray;
+    --main-font: Arial, Helvetica, sans-serif;
+    --second-font-color: white;
+    --low-priority-color: lightgray;
+    --medium-priority-color: orange;
+    --high-priority-color: rgb(230, 104, 81);
+    --checkmark-main: #aaa;
+    --checkmark-second: #777;
+    --hover-color: black;
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-bg);
+    font-family: var(--main-font);
+}
+
+article{
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 2% 10% 10% 10%;
+    align-items: center;
+}
+
+form{
+    width: 100%;
+}
+
+section{
+    padding-top: 2vh;
+    display: flex;
+}
+
+header, h1{
+    margin-bottom: 0;
+}
+
+section.add-task{
+    display: flex;
+    gap: 1em;
+    height: 2em;
+}
+
+section.add-task>div{
+    border-radius: var(--border-radius);
+    border: 1px solid var(--second-border-color);
+    background-color: var(--second-bg);
+    padding: 3px;
+}
+
+section.add-task input,
+section.add-task button{
+    border: none;
+    background-color: inherit;
+    box-sizing: border-box;
+}
+
+.add-task-name{
+    flex: 1 2 80%;
+}
+
+.add-task-name>input{
+    width: 100%;
+    height: 100%;
+    font-size: medium;
+}
+
+.add-task-submit{
+    flex: 1 1 10%;
+}
+
+.add-task-submit>button{
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+}
+
+.add-task-submit:hover{
+    border-color: var(--checkmark-main);
+}
+
+section.find{
+    display: flex;
+    gap: 20%;
+    height: 2em;
+}
+
+section.find>div{
+    display: flex;
+    border: 1px solid var(--second-border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--second-bg);
+    padding: 6px;
+}
+
+div.sort,
+div.filter{
+    display: flex;
+    flex: 1 1 40%;
+}
+
+div.sort-text, 
+div.filter-text{
+    width: fit-content;
+    margin-right: 0.5em;
+    flex-shrink: 0;
+}
+
+div.sort-input, div.filter-input{
+    flex: 1;
+}
+
+select, input, button{
+    cursor: pointer;
+}
+
+select:focus-visible, input:focus-visible, button:focus-visible{
+    outline: none;
+}
+
+div.add-task-name>input:hover::placeholder{
+    color: var(--hover-color);
+}
+
+div.add-task-name:hover{
+    border-color: var(--checkmark-main);
+}
+
+div.sort-input>select,
+div.filter-input>select{
+    width: 100%;
+    border: none;
+    color: var(--sort-font-color);
+    font-size:medium;
+}
+
+div.sort-input:hover>select,
+div.filter-input:hover>select{
+    color: var(--hover-color);
+}
+
+section.tasks{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--second-bg);
+    margin-top: 1em;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    padding-top: 0;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--second-border-color)
+}
+
+div.task{
+    display:grid;
+    grid-template-columns: 25px 1fr 120px 25px;
+    height: auto;
+    margin-top: 0.5em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--second-border-color);
+}
+
+div.task:last-child{
+    border-bottom: none;
+}
+
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  margin-top: 0.12em;
+}
+
+.custom-checkbox input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  border: 2px solid var(--checkmark-main);
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.checkmark:hover{
+    border-color: var(--hover-color);
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 3px;
+  height: 6px;
+  border: solid var(--checkmark-second);
+  border-width: 0 2px 2px 0;
+    transform: scale(0) rotate(45deg);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.custom-checkbox input:checked + .checkmark::after {
+  transform: scale(1) rotate(45deg);
+  opacity: 1;
+}
+
+div.priority{
+    width: fit-content;
+    border-radius: var(--priority-border-radius);
+    padding: 0.2em 0.7em 0.2em 0.7em;
+    font-size: small;
+}
+
+div.priority.medium{
+    background-color: var(--medium-priority-color);
+    color: var(--second-font-color);
+}
+
+div.priority.high{
+    background-color: var(--high-priority-color);
+    color: var(--second-font-color);
+}
+
+div.priority.low{
+    background-color: var(--low-priority-color);
+}
+
+div.task>div.date{
+    text-align: right;
+    color: var(--sort-font-color);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0.1em;
+  color: var(--checkmark-main);
+  cursor: pointer;
+}
+
+.buttons i:hover {
+  color: var(--hover-color)
+}
+
+dialog{
+    border: 1px solid var(--second-border-color);
+    border-radius: var(--border-radius);
+    width: 320px;
+}
+
+@media (max-width: 400px) {
+    dialog{
+        border: 1px solid var(--second-border-color);
+        border-radius: var(--border-radius);
+        width: 80vw;
+    }
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 0.4em;
+}
+
+header>h2{
+    margin: 0;
+}
+
+button.exit{
+    border: none;
+    background: none;
+    font-size: large;
+    color: var(--sort-font-color);
+}
+
+button.exit:hover{
+    color: var(--hover-color);
+}
+
+section.edit-task{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+section.edit-task>div{
+    display: flex;
+    flex-direction: column;
+}
+
+section.edit-task>div.edit-task-buttons{
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    gap: 3%;
+}
+
+div.edit-task-buttons>button{
+    width: 48%;
+    padding: 0.5em;
+    border-radius: var(--border-radius);
+    font-size: 1em;
+}
+
+button#edit-task-submit{
+    background-color: rgb(94, 94, 233);
+    color: var(--second-font-color);
+    border: 1px solid blue;
+}
+
+button#edit-task-submit:hover{
+    color: #e0e0e0;
+    border-color: lightblue;
+}
+
+button#edit-task-exit{
+    background-color: var(--second-bg);
+    border: 1px solid var(--second-border-color);
+}
+
+button#edit-task-exit:hover{
+    border-color: var(--hover-color);
+}
+
+section.edit-task input{
+    border-radius: var(--border-radius);
+    border: 1px solid var(--second-border-color);
+    padding: 0.5em;
+}
+
+section.edit-task input:hover{
+    border-color: var(--checkmark-second);
+}
+
+section.edit-task input:hover::placeholder{
+    color: var(--hover-color);
+}
+
+
+fieldset.priority-input{
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.radio-button {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1em;
+}
+
+.radio-button input[type="radio"]:hover{
+    border-color: #1a73e8;
+}
+
+.radio-button input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #5f6368; /* сірий контур */
+  border-radius: 50%;
+  background-color: white;
+  position: relative;
+  cursor: pointer;
+  margin-right: 0.5em;
+  transition: border-color 0.2s;
+}
+
+.radio-button input[type="radio"]:checked {
+  border-color: #1a73e8;
+    background-color: #1a73e8;
+}
+
+.radio-button input[type="radio"]::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease;
+}
+
+.radio-button input[type="radio"]:checked::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+label:hover{
+    cursor: pointer;
+}
