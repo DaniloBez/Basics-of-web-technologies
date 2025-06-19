@@ -15,11 +15,11 @@
         </header>
         <form>
             <section class="add-task">
-                <div class="add-task-name">
-                    <input type="text" id="task-name-input" name="task-name" placeholder="Add a new task">
+                <div class="filter-task-by-name">
+                    <input type="text" id="filter-task-by-name-input" name="task-name" placeholder="Filter by name">
                 </div>
                 <div class="add-task-submit">
-                    <button type="button" value="Add" onclick="document.getElementById('edit-task-window').showModal()">Add</button>
+                    <button type="button" value="Add" id="add-task-button">Add</button>
                 </div>
             </section>
             <section class="find">
@@ -47,7 +47,7 @@
             <section class="tasks">
                  <div class="task">
                     <label class="custom-checkbox">
-                        <input type="checkbox" name="checkbox" id="task-1">
+                        <input type="checkbox" name="checkbox">
                         <span class="checkmark"></span>
                     </label>
                     <div class="main-info">
@@ -67,7 +67,7 @@
                 </div>
                 <div class="task">
                     <label class="custom-checkbox">
-                        <input type="checkbox" name="checkbox" id="task-2">
+                        <input type="checkbox" name="checkbox">
                         <span class="checkmark"></span>
                     </label>
                     <div class="main-info">
@@ -87,7 +87,7 @@
                 </div>
                 <div class="task">
                     <label class="custom-checkbox">
-                        <input type="checkbox" name="checkbox" id="task-3">
+                        <input type="checkbox" name="checkbox">
                         <span class="checkmark"></span>
                     </label>
                     <div class="main-info">
@@ -107,7 +107,7 @@
                 </div>
                 <div class="task">
                     <label class="custom-checkbox">
-                        <input type="checkbox" name="checkbox" id="task-4">
+                        <input type="checkbox" name="checkbox">
                         <span class="checkmark"></span>
                     </label>
                     <div class="main-info">
@@ -129,41 +129,42 @@
             <dialog id="edit-task-window">
                 <header>
                     <h2>Додати завдання</h2>
-                    <button type="button" class="exit" id="exit-button" onclick="document.getElementById('edit-task-window').close()">&#10006;</button>
+                    <button type="button" class="exit" id="exit-button">&#10006;</button>
                 </header>
                 <section class="edit-task">
                     <div class="name-edit">
-                        <label for="task-name-input2">Назва завдання</label>
-                        <input type="text" id="task-name-input2" name="task-name-input2" placeholder="Наприклад: Завдання 1">
+                        <label for="task-name-input" required>Назва завдання</label>
+                        <input type="text" id="task-name-input" name="task-name-input" placeholder="Наприклад: Завдання 1">
                     </div>
                     <div class="date-edit">
-                        <label for="task-date-input">Дата виконання</label>
-                        <input type="text" id="task-date-input" name="task-date-input" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Оберіть дату">
+                        <label for="task-date-input" required>Дата виконання</label>
+                        <input type="date" id="task-date-input" name="task-date-input">
                     </div>
                     <div class="priority-chose">
                         Пріорітет
-                        <fieldset class="priority-input">
+                        <fieldset class="priority-input" required>
                             <div class="radio-button">
-                                <input type="radio" name="priority-input" id="priority-high">
+                                <input type="radio" name="priority-input" id="priority-high" value="high">
                                 <label for="priority-high">Високий</label>
                             </div>
                             <div class="radio-button">
-                                <input type="radio" name="priority-input" id="priority-medium">
+                                <input type="radio" name="priority-input" id="priority-medium" value="medium">
                                 <label for="priority-medium">Середній</label>
                             </div>
                             <div class="radio-button">
-                                <input type="radio" name="priority-input" id="priority-low">
+                                <input type="radio" name="priority-input" id="priority-low" value="low">
                                 <label for="priority-low">Низький</label>
                             </div>
                         </fieldset>
                     </div>
                     <div class="edit-task-buttons">
-                        <button type="button" id="edit-task-submit" onclick="document.getElementById('edit-task-window').close()">Додати завдання</button>
-                        <button type="button" id="edit-task-exit" onclick="document.getElementById('edit-task-window').close()">Скасувати</button>
+                        <button type="button" id="edit-task-submit">Додати завдання</button>
+                        <button type="button" id="edit-task-exit">Скасувати</button>
                     </div>
                 </section>
             </dialog>
         </form>
     </article>
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>

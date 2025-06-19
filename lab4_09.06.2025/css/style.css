@@ -65,11 +65,11 @@ section.add-task button{
     box-sizing: border-box;
 }
 
-.add-task-name{
+.filter-task-by-name{
     flex: 1 2 80%;
 }
 
-.add-task-name>input{
+.filter-task-by-name>input{
     width: 100%;
     height: 100%;
     font-size: medium;
@@ -387,7 +387,7 @@ fieldset.priority-input{
   -webkit-appearance: none;
   width: 18px;
   height: 18px;
-  border: 2px solid #5f6368; /* сірий контур */
+  border: 2px solid #5f6368;
   border-radius: 50%;
   background-color: white;
   position: relative;
