@@ -422,3 +422,11 @@ fieldset.priority-input{
 label:hover{
     cursor: pointer;
 }
+
+i.fa-pen-to-square{
+    visibility: hidden;
+}
+
+div.task:hover i.fa-pen-to-square{
+    visibility: visible;
+}

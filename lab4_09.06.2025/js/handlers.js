@@ -18,6 +18,39 @@ export function startCreatingTask(){
     priorityHigh.checked = true;
     priorityHigh.checked = false;
 
+    editTaskWindow.name = null;
+    editTaskWindow.showModal();
+}
+
+/**
+ * Відкриває діалогове вікно для створення нової задачі.
+ * Завантажує дані з задачі.
+ * @param {MouseEvent} event подія взаємодії з задачею
+ */
+export function startEditingTask(event){
+    const task = getTaskFromEvent(event);
+    if(task == null)
+        return;
+
+    const nameField = document.getElementById("task-name-input");
+    nameField.value = task.name;
+
+    const dateInput = document.getElementById("task-date-input");
+    const yyyy = task.date.getFullYear();
+    const mm = String(task.date.getMonth() + 1).padStart(2, '0'); // місяці від 0 до 11
+    const dd = String(task.date.getDate()).padStart(2, '0');
+    dateInput.value = `${yyyy}-${mm}-${dd}`
+
+    if(task.priority === "high")
+        document.getElementById("priority-high").checked = true;
+    
+    if(task.priority === "medium")
+        document.getElementById("priority-medium").checked = true;
+
+    if(task.priority === "low")
+        document.getElementById("priority-low").checked = true;
+
+    editTaskWindow.name = task.id;
     editTaskWindow.showModal();
 }
 
@@ -41,10 +74,10 @@ export function setMinDate(){
 }
 
 /**
- * Створює нове завдання з введених даних.
+ * Створює нове завдання з введених даних або оновлює завдання.
  * @returns alarm - Якщо введено неправильні дані.
  */
-export function createTask(){
+export function saveTask(){
     const name = document.getElementById("task-name-input").value.trim();
     if(!name){
         alert("Enter name!");
@@ -78,8 +111,19 @@ export function createTask(){
         return;
     }
 
-    const task = new Task(name, enteredDate, priority, false);
-    allTasks.push(task);
+    if(editTaskWindow.name == null){
+        const task = new Task(name, enteredDate, priority, false);
+        allTasks.push(task);
+    }
+    else{
+        let task = allTasks.find(task => task.id == editTaskWindow.name);
+        if(task == null)
+            return;
+
+        task.name = name;
+        task.date = enteredDate;
+        task.priority = priority;
+    }
     
     renderAllTasks();
 
@@ -88,7 +132,7 @@ export function createTask(){
 
 /**
  * Змінює значення завдання.
- * @param {MouseEvent} event 
+ * @param {MouseEvent} event подія взаємодії з задачею
  */
 export function checkTask(event){
     const task = getTaskFromEvent(event);
@@ -102,7 +146,7 @@ export function checkTask(event){
 
 /**
  * Видаляє задачу, якщо вона вже виконана.
- * @param {MouseEvent} event 
+ * @param {MouseEvent} event подія взаємодії за задачею
  */
 export function deleteTask(event){
     const task = getTaskFromEvent(event);
@@ -117,7 +161,7 @@ export function deleteTask(event){
 
 /**
  * Повертає задачу, з яким взаємодіють.
- * @param {MouseEvent | FocusEvent} event - Подія взаємодії з задачею 
+ * @param {MouseEvent} event - Подія взаємодії з задачею 
  * @returns Задача, на який натиснули
  */
 function getTaskFromEvent(event) {

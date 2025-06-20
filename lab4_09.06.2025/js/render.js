@@ -1,7 +1,7 @@
 import { Task} from "./model.js";
 import { displayedTasks } from "./state.js";
 import { createElement, capitalize } from "./utils.js";
-import { applySort, applyFilter, checkTask, deleteTask } from "./handlers.js";
+import { applySort, applyFilter, checkTask, deleteTask, startEditingTask } from "./handlers.js";
 
 /**@type {HTMLElement} */
 const tasksElement = document.querySelector("section.tasks");
@@ -59,6 +59,11 @@ function renderTask(task){
         const deleteButton = createElement("i", "fas fa-trash");
         deleteButton.addEventListener("click", deleteTask);
         buttons.appendChild(deleteButton);
+    }
+    else{
+        const editButton = createElement("i", "fas fa-pen-to-square");
+        editButton.addEventListener("click", startEditingTask);
+        buttons.appendChild(editButton);
     }
 
     taskElement.appendChild(buttons);
