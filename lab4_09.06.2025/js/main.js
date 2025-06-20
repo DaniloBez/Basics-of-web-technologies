@@ -1,12 +1,14 @@
 import {addTaskSubmitButton, exitButton, exitTaskExitButton, exitTaskSubmitButton, sortSelectInput, filterSelectInput} from "./dom.js";
 import {startCreatingTask, exitFromEditTask, createTask, setMinDate} from "./handlers.js"
+import { renderAllTasks } from "./render.js";
 
 // --- Events ---
 addTaskSubmitButton.addEventListener("click", startCreatingTask);
 exitButton.addEventListener("click", exitFromEditTask);
 exitTaskExitButton.addEventListener("click", exitFromEditTask);
 exitTaskSubmitButton.addEventListener("click", createTask);
-//sortSelectInput.addEventListener("select", );
-//filterSelectInput.addEventListener("select", );
+sortSelectInput.addEventListener("change", renderAllTasks);
+filterSelectInput.addEventListener("change", renderAllTasks);
 
+// --- init ---
 setMinDate();

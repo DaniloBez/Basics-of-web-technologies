@@ -12,6 +12,12 @@ export function createElement(tag, classList = '', textContent = ''){
     return el;
 }
 
+/**
+ * Перетворює слово так, що 1 літера стає великою, а інші - малими.
+ * 
+ * @param {String} str 
+ * @returns Слово, у якому 1 літера велика, усі інші - малі
+ */
 export function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }

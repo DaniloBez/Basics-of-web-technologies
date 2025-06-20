@@ -5,7 +5,7 @@
 export class Task {
 
     /**
-     * 
+     * Ініціалізує завдання з заданими параметрами і згенерованим ID.
      * @param {String} name 
      * @param {Date} date 
      * @param {String} priority 
@@ -19,6 +19,10 @@ export class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Перетворює дату у зручний формат.
+     * @returns Дату у форматі: місяць число, рік.
+     */
     dateToString() {
         return this.date.toLocaleDateString("en-US", {
             year: "numeric",

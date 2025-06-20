@@ -1,18 +1,27 @@
 import { Task} from "./model.js";
-import { tasks } from "./state.js";
+import { displayedTasks } from "./state.js";
 import { createElement, capitalize } from "./utils.js";
+import { applySort } from "./handlers.js";
 
+/**@type {HTMLElement} */
 const tasksElement = document.querySelector("section.tasks");
 
+/**
+ * Перемальовує усі завдання
+ */
 export function renderAllTasks(){
     tasksElement.innerHTML = "";
-    for (const task of tasks) {
+
+    //applyFilter();
+    applySort();
+
+    for (const task of displayedTasks) {
         renderTask(task);
     }
 }
 
 /**
- * 
+ * Перемальовує завдання відповідно до її значень
  * @param {Task} task 
  */
 function renderTask(task){

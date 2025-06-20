@@ -1,8 +1,12 @@
 import { Task} from "./model.js";
-import { tasks } from "./state.js";
-import { editTaskWindow } from "./dom.js";
+import { allTasks, displayedTasks } from "./state.js";
+import { editTaskWindow, sortSelectInput } from "./dom.js";
 import { renderAllTasks } from "./render.js";
 
+/**
+ * Відкриває діалогове вікно для створення нової задачі.
+ * Очищує поля.
+ */
 export function startCreatingTask(){
     const nameField = document.getElementById("task-name-input");
     nameField.value = "";
@@ -17,10 +21,16 @@ export function startCreatingTask(){
     editTaskWindow.showModal();
 }
 
+/**
+ * Закриває діалогове вікно для редагування/створенян завдання.
+ */
 export function exitFromEditTask(){
     editTaskWindow.close();
 }
 
+/**
+ * Задає мінімальну дату (сьогоднішню) до task-date-input.
+ */
 export function setMinDate(){
     const input = document.getElementById("task-date-input");
     const today = new Date();
@@ -30,6 +40,10 @@ export function setMinDate(){
     input.min = `${yyyy}-${mm}-${dd}`;
 }
 
+/**
+ * Створює нове завдання з введених даних.
+ * @returns alarm - Якщо введено неправильні дані.
+ */
 export function createTask(){
     const name = document.getElementById("task-name-input").value.trim();
     if(!name){
@@ -65,9 +79,39 @@ export function createTask(){
     }
 
     const task = new Task(name, enteredDate, priority, false);
-    tasks.push(task);
+    allTasks.push(task);
     
     renderAllTasks();
 
     editTaskWindow.close();
+}
+
+/**
+ * Сотрує масив за вказаним сортуванням.
+ */
+export function applySort(){
+    displayedTasks.splice(0, displayedTasks.length, ...allTasks);
+
+    const priorityOrder = {
+        high: 3,
+        medium: 2,
+        low: 1,
+    };
+
+    switch (sortSelectInput.value) {
+        case "dateAsc":
+            displayedTasks.sort((a, b) => a.date - b.date);
+            break;
+        case "dateDesc":
+            displayedTasks.sort((a, b) => b.date - a.date);
+            break;
+        case "priorityAsc":
+            displayedTasks.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+            break;
+        case "priorityDesc":
+            displayedTasks.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
+            break;
+        default:
+            break;
+    }
 }
