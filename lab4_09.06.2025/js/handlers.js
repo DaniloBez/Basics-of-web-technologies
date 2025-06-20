@@ -1,6 +1,6 @@
 import { Task} from "./model.js";
 import { allTasks, displayedTasks } from "./state.js";
-import { editTaskWindow, sortSelectInput } from "./dom.js";
+import { editTaskWindow, sortSelectInput, filterSelectInput } from "./dom.js";
 import { renderAllTasks } from "./render.js";
 
 /**
@@ -90,9 +90,6 @@ export function createTask(){
  * Сотрує масив за вказаним сортуванням.
  */
 export function applySort(){
-    console.log(allTasks);
-    displayedTasks.splice(0, displayedTasks.length, ...allTasks);
-
     const priorityOrder = {
         high: 3,
         medium: 2,
@@ -115,6 +112,53 @@ export function applySort(){
         default:
             break;
     }
+
+    displayedTasks.sort((a, b) => a.isDone - b.isDone);
+}
+
+/**
+ * Фільтрує данні за вибраним фільтром.
+ */
+export function applyFilter(){
+    let filteredTasks = [...allTasks];
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const weekFromToday = new Date(today);
+    weekFromToday.setDate(today.getDate() + 7);
+
+    switch (filterSelectInput.value) {
+        case "today":
+            filteredTasks = allTasks.filter((task) => {
+                const taskDate = new Date(task.date);
+                taskDate.setHours(0, 0, 0, 0);
+                return taskDate.getTime() === today.getTime();
+            });
+            break;
+        case "week":
+            filteredTasks = allTasks.filter((task) => {
+                const taskDate = new Date(task.date);
+                return taskDate >= today && taskDate <= weekFromToday;
+            });
+            break;
+        case "past":
+            filteredTasks = allTasks.filter((task) => {
+                const taskDate = new Date(task.date);
+                return taskDate < today;
+            });
+            break;
+        case "upcoming":
+            filteredTasks = allTasks.filter((task) => {
+                const taskDate = new Date(task.date);
+                return taskDate > today;
+            });
+            break;
+        default:
+            break;
+    }
+
+    displayedTasks.splice(0, displayedTasks.length, ...filteredTasks);
 }
 
 /**
@@ -131,6 +175,4 @@ export async function loadDataFromJson(){
         task.isDone,
         task.id
     )));
-
-    console.log(allTasks);
 }

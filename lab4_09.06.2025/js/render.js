@@ -1,7 +1,7 @@
 import { Task} from "./model.js";
 import { displayedTasks } from "./state.js";
 import { createElement, capitalize } from "./utils.js";
-import { applySort } from "./handlers.js";
+import { applySort, applyFilter } from "./handlers.js";
 
 /**@type {HTMLElement} */
 const tasksElement = document.querySelector("section.tasks");
@@ -12,7 +12,7 @@ const tasksElement = document.querySelector("section.tasks");
 export function renderAllTasks(){
     tasksElement.innerHTML = "";
 
-    //applyFilter();
+    applyFilter();
     applySort();
 
     for (const task of displayedTasks) {
@@ -26,12 +26,13 @@ export function renderAllTasks(){
  */
 function renderTask(task){
     const taskElement = createElement("div", "task");
-    taskElement.id = task.Id;
+    taskElement.id = task.id;
 
     const customCheckBox = createElement("label", "custom-checkbox");
     const checkBox = createElement("input");
     checkBox.type = "checkbox";
     checkBox.name = "checkbox";
+    checkBox.checked = task.isDone;
     customCheckBox.appendChild(checkBox);
 
     const checkmark = createElement("span", "checkmark");
