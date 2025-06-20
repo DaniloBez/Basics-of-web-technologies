@@ -1,7 +1,7 @@
 import { Task} from "./model.js";
 import { displayedTasks } from "./state.js";
 import { createElement, capitalize } from "./utils.js";
-import { applySort, applyFilter } from "./handlers.js";
+import { applySort, applyFilter, checkTask } from "./handlers.js";
 
 /**@type {HTMLElement} */
 const tasksElement = document.querySelector("section.tasks");
@@ -33,6 +33,7 @@ function renderTask(task){
     checkBox.type = "checkbox";
     checkBox.name = "checkbox";
     checkBox.checked = task.isDone;
+    checkBox.addEventListener("click", checkTask);
     customCheckBox.appendChild(checkBox);
 
     const checkmark = createElement("span", "checkmark");

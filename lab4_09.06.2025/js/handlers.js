@@ -87,6 +87,30 @@ export function createTask(){
 }
 
 /**
+ * Змінює значення завдання.
+ * @param {MouseEvent} event 
+ */
+export function checkTask(event){
+    const task = getTaskFromEvent(event);
+    if(task == null)
+        return;
+
+    task.isDone = event.target.checked;
+    
+    renderAllTasks();
+}
+
+/**
+ * Повертає задачу, з яким взаємодіють.
+ * @param {MouseEvent | FocusEvent} event - Подія взаємодії з задачею 
+ * @returns Задача, на який натиснули
+ */
+function getTaskFromEvent(event) {
+    const id = event.target.closest('.task')?.id;
+    return allTasks.find(task => task.id == id);
+}
+
+/**
  * Сотрує масив за вказаним сортуванням.
  */
 export function applySort(){
