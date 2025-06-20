@@ -1,7 +1,7 @@
 import { Task} from "./model.js";
 import { displayedTasks } from "./state.js";
 import { createElement, capitalize } from "./utils.js";
-import { applySort, applyFilter, checkTask } from "./handlers.js";
+import { applySort, applyFilter, checkTask, deleteTask } from "./handlers.js";
 
 /**@type {HTMLElement} */
 const tasksElement = document.querySelector("section.tasks");
@@ -52,6 +52,16 @@ function renderTask(task){
 
     const date = createElement("div", "date", task.dateToString())
     taskElement.appendChild(date);
+
+    const buttons = createElement("div", "buttons");
+
+    if(task.isDone){
+        const deleteButton = createElement("i", "fas fa-trash");
+        deleteButton.addEventListener("click", deleteTask);
+        buttons.appendChild(deleteButton);
+    }
+
+    taskElement.appendChild(buttons);
 
     tasksElement.appendChild(taskElement);
 }

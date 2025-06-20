@@ -101,6 +101,21 @@ export function checkTask(event){
 }
 
 /**
+ * Видаляє задачу, якщо вона вже виконана.
+ * @param {MouseEvent} event 
+ */
+export function deleteTask(event){
+    const task = getTaskFromEvent(event);
+    if(task == null)
+        return;
+
+    const taskIndex = allTasks.findIndex((t) => t.id == task.id);
+    if(taskIndex !== -1) allTasks.splice(taskIndex, 1);
+
+    renderAllTasks();
+}
+
+/**
  * Повертає задачу, з яким взаємодіють.
  * @param {MouseEvent | FocusEvent} event - Подія взаємодії з задачею 
  * @returns Задача, на який натиснули
