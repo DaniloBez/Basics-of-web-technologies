@@ -1,5 +1,5 @@
 import {addTaskSubmitButton, exitButton, exitTaskExitButton, exitTaskSubmitButton, sortSelectInput, filterSelectInput} from "./dom.js";
-import {startCreatingTask, exitFromEditTask, createTask, setMinDate} from "./handlers.js"
+import {startCreatingTask, exitFromEditTask, createTask, setMinDate, loadDataFromJson} from "./handlers.js"
 import { renderAllTasks } from "./render.js";
 
 // --- Events ---
@@ -12,3 +12,8 @@ filterSelectInput.addEventListener("change", renderAllTasks);
 
 // --- init ---
 setMinDate();
+
+window.addEventListener("DOMContentLoaded", async () => {
+  await loadDataFromJson();
+  renderAllTasks();
+});

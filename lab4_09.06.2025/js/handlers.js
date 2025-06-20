@@ -90,6 +90,7 @@ export function createTask(){
  * Сотрує масив за вказаним сортуванням.
  */
 export function applySort(){
+    console.log(allTasks);
     displayedTasks.splice(0, displayedTasks.length, ...allTasks);
 
     const priorityOrder = {
@@ -114,4 +115,22 @@ export function applySort(){
         default:
             break;
     }
+}
+
+/**
+ * Завантажує данні з Json
+ */
+export async function loadDataFromJson(){
+    const response = await fetch("../data/data.json");
+    const data = await response.json();
+
+    allTasks.splice(0, allTasks.length, ...data.map(task => new Task(
+        task.name,
+        new Date(task.date),
+        task.priority,
+        task.isDone,
+        task.id
+    )));
+
+    console.log(allTasks);
 }

@@ -10,9 +10,10 @@ export class Task {
      * @param {Date} date 
      * @param {String} priority 
      * @param {Boolean} isDone 
+     * @param {String} id - необов'язковий. Якщо не вказано — генерується автоматично.
      */
-    constructor(name, date, priority, isDone) {
-        this.Id = crypto.randomUUID();
+    constructor(name, date, priority, isDone, id = crypto.randomUUID()) {
+        this.id = id;
         this.name = name;
         this.date = date;
         this.priority = priority;
