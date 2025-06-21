@@ -24,11 +24,12 @@ body{
 }
 
 article{
+    margin-top: 0;
     height: auto;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    padding: 2% 10% 10% 10%;
+    padding: 0% 10% 0% 10%;
     align-items: center;
 }
 
@@ -41,7 +42,36 @@ section{
     display: flex;
 }
 
-header, h1{
+header.main-header {
+    position: sticky;
+    top: 0;
+    background-color: var(--second-bg);
+    padding: 1em 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid var(--second-border-color);
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2em;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--hover-color);
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+h1{
     margin-bottom: 0;
 }
 
@@ -169,7 +199,7 @@ div.task{
     margin-top: 0.5em;
     padding-bottom: 0.3em;
     border-bottom: 1px solid var(--second-border-color);
-}
+}   
 
 div.task:last-child{
     border-bottom: none;

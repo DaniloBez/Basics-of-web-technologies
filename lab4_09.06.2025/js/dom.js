@@ -8,7 +8,7 @@ export const exitButton = document.getElementById("exit-button");
 export const exitTaskExitButton = document.getElementById("edit-task-exit");
 
 /**@type {HTMLButtonElement} */
-export const exitTaskSubmitButton = document.getElementById("edit-task-submit");
+export const editTaskSubmitButton = document.getElementById("edit-task-submit");
 
 /**@type {HTMLSelectElement} */
 export const sortSelectInput = document.getElementById("sort-select-input");
@@ -18,3 +18,9 @@ export const filterSelectInput = document.getElementById("filter-select-input");
 
 /**@type {HTMLDialogElement} */
 export const editTaskWindow = document.getElementById("edit-task-window");
+
+/**@type {HTMLInputElement} */
+export const filterTaskByNameInput = document.getElementById("filter-task-by-name-input");
+
+/**@type {HTMLElement}*/
+export const editTaskHeader = document.getElementById("edit-task-header");

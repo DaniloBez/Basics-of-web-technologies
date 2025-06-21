@@ -9,10 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    <header class="main-header">
+        <nav class="nav-links">
+            <a href="index.html">📝 To-Do</a>
+            <a href="analytics.html">📊 Analytics</a>
+        </nav>
+    </header>
     <article>
-        <header>
-            <h1>To-Do List</h1>
-        </header>
+        <h1>To-Do List</h1>
         <form>
             <section class="add-task">
                 <div class="filter-task-by-name">
@@ -56,7 +60,7 @@
             </section>
             <dialog id="edit-task-window">
                 <header>
-                    <h2>Додати завдання</h2>
+                    <h2 id="edit-task-header">Додати завдання</h2>
                     <button type="button" class="exit" id="exit-button">&#10006;</button>
                 </header>
                 <section class="edit-task">

@@ -1,6 +1,6 @@
 import { Task} from "./model.js";
 import { allTasks, displayedTasks } from "./state.js";
-import { editTaskWindow, sortSelectInput, filterSelectInput } from "./dom.js";
+import { editTaskWindow, sortSelectInput, filterSelectInput, editTaskSubmitButton, editTaskHeader } from "./dom.js";
 import { renderAllTasks } from "./render.js";
 
 /**
@@ -17,6 +17,9 @@ export function startCreatingTask(){
     const priorityHigh = document.getElementById("priority-high");
     priorityHigh.checked = true;
     priorityHigh.checked = false;
+
+    editTaskHeader.textContent = "Додати завдання";
+    editTaskSubmitButton.textContent = "Додати завдання";
 
     editTaskWindow.name = null;
     editTaskWindow.showModal();
@@ -49,6 +52,9 @@ export function startEditingTask(event){
 
     if(task.priority === "low")
         document.getElementById("priority-low").checked = true;
+
+    editTaskHeader.textContent = "Редагувати завдання";
+    editTaskSubmitButton.textContent = "Зберігти завдання";
 
     editTaskWindow.name = task.id;
     editTaskWindow.showModal();
@@ -240,6 +246,13 @@ export function applyFilter(){
         default:
             break;
     }
+
+    const taskNameInput = document.getElementById("filter-task-by-name-input");
+    const taskNameStartWith = taskNameInput.value.toLowerCase();
+
+    filteredTasks = filteredTasks.filter((task) =>{
+        return task.name.toLowerCase().startsWith(taskNameStartWith);
+    });
 
     displayedTasks.splice(0, displayedTasks.length, ...filteredTasks);
 }
