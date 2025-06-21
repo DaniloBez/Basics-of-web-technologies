@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1a2b3c4d-0001",
+    "name": "Завершити домашнє завдання",
+    "date": "2025-06-20T10:00:00.000Z",
+    "priority": "high",
+    "isDone": false
+  },
+  {
+    "id": "1a2b3c4d-0002",
+    "name": "Піти в магазин",
+    "date": "2025-06-21T15:30:00.000Z",
+    "priority": "medium",
+    "isDone": true
+  },
+  {
+    "id": "1a2b3c4d-0003",
+    "name": "Підготуватися до тесту",
+    "date": "2025-06-22T09:00:00.000Z",
+    "priority": "high",
+    "isDone": false
+  },
+  {
+    "id": "1a2b3c4d-0004",
+    "name": "Прибрати в кімнаті",
+    "date": "2025-06-23T14:00:00.000Z",
+    "priority": "low",
+    "isDone": false
+  },
+  {
+    "id": "1a2b3c4d-0005",
+    "name": "Прочитати книгу",
+    "date": "2025-06-24T18:00:00.000Z",
+    "priority": "medium",
+    "isDone": false
+  },
+  {
+    "id": "1a2b3c4d-0006",
+    "name": "Зробити проект",
+    "date": "2025-06-25T12:00:00.000Z",
+    "priority": "high",
+    "isDone": false
+  },
+  {
+    "id": "1a2b3c4d-0008",
+    "name": "Навчитися готувати пасту",
+    "date": "2025-06-27T17:45:00.000Z",
+    "priority": "medium",
+    "isDone": false
+  },
+  {
+    "id": "1a2b3c4d-0009",
+    "name": "Піти на прогулянку",
+    "date": "2025-06-28T08:00:00.000Z",
+    "priority": "low",
+    "isDone": true
+  },
+  {
+    "id": "1a2b3c4d-0010",
+    "name": "Повторити JavaScript",
+    "date": "2025-06-29T13:00:00.000Z",
+    "priority": "high",
+    "isDone": false
+  }
+]
