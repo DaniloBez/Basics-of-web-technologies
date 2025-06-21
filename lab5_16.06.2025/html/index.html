@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Bezukh Danylo">
+    <title>Lab5</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="nav-links">
+            <a href="index.html">📝 To-Do</a>
+            <a href="analytics.html">📊 Analytics</a>
+        </nav>
+    </header>
+    <article>
+        <h1>To-Do List</h1>
+        <form>
+            <section class="add-task">
+                <div class="filter-task-by-name">
+                    <input type="text" id="filter-task-by-name-input" name="task-name" placeholder="Filter by name">
+                </div>
+                <div class="add-task-submit">
+                    <button type="button" value="Add" id="add-task-button">Add</button>
+                </div>
+            </section>
+            <section class="find">
+                <div class="sort">
+                    <div class="sort-text">
+                        Sort by:
+                    </div>
+                    <div class="sort-input">
+                        <select name="sort-select" id="sort-select-input">
+                            <option value="dateAsc">Date &#8593;</option>
+                            <option value="dateDesc">Date &#8595;</option>
+                            <option value="priorityAsc">Priority &#8593;</option>
+                            <option value="priorityDesc" selected>Priority &#8595;</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter">
+                    <div class="filter-text">
+                        Filter:
+                    </div>
+                    <div class="filter-input">
+                        <select name="filter-select" id="filter-select-input">
+                            <option value="all" selected>All</option>
+                            <option value="today">Today</option>
+                            <option value="week">Week</option>
+                            <option value="past">Past</option>
+                            <option value="upcoming">Upcoming</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+            <section class="tasks">
+                <!-- Auto-generated code -->
+            </section>
+            <dialog id="edit-task-window">
+                <header>
+                    <h2 id="edit-task-header">Додати завдання</h2>
+                    <button type="button" class="exit" id="exit-button">&#10006;</button>
+                </header>
+                <section class="edit-task">
+                    <div class="name-edit">
+                        <label for="task-name-input" required>Назва завдання</label>
+                        <input type="text" id="task-name-input" name="task-name-input" placeholder="Наприклад: Завдання 1">
+                    </div>
+                    <div class="date-edit">
+                        <label for="task-date-input" required>Дата виконання</label>
+                        <input type="date" id="task-date-input" name="task-date-input">
+                    </div>
+                    <div class="priority-chose">
+                        Пріорітет
+                        <fieldset class="priority-input" required>
+                            <div class="radio-button">
+                                <input type="radio" name="priority-input" id="priority-high" value="high">
+                                <label for="priority-high">Високий</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" name="priority-input" id="priority-medium" value="medium">
+                                <label for="priority-medium">Середній</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" name="priority-input" id="priority-low" value="low">
+                                <label for="priority-low">Низький</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="edit-task-buttons">
+                        <button type="button" id="edit-task-submit">Додати завдання</button>
+                        <button type="button" id="edit-task-exit">Скасувати</button>
+                    </div>
+                </section>
+            </dialog>
+        </form>
+    </article>
+    <script type="module" src="../js/main.js"></script>
+</body>
+</html>
