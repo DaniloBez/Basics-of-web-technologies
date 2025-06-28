@@ -40,7 +40,7 @@ export function startEditingTask(event){
 
     const dateInput = document.getElementById("task-date-input");
     const yyyy = task.date.getFullYear();
-    const mm = String(task.date.getMonth() + 1).padStart(2, '0'); // місяці від 0 до 11
+    const mm = String(task.date.getMonth() + 1).padStart(2, '0');
     const dd = String(task.date.getDate()).padStart(2, '0');
     dateInput.value = `${yyyy}-${mm}-${dd}`
 
